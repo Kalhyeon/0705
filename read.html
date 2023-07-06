@@ -10,6 +10,23 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="read.js"></script>
   <title>LAYOUT</title>
+  <script>
+    $(document).ready(async function() {
+      const no = getPageno();
+      if(no===null) {
+        alert('올바르지 않은 접근 경로입니다.');
+        location.href = "index.html";
+      }
+      const result = await fetch(no);
+      if(result===null) {
+        alert('서버가 응답하지 않습니다.');
+        location.href = "index.html";
+      }
+      // result 는 한 사람의 정보 : no, name, address, tel, photo
+      console.log(result);
+      printContact(result);
+    });
+  </script>
 </head>
 <body>
   <div id="page">
@@ -21,7 +38,12 @@
     </nav>
     <main>
       <aside></aside>
-      <section></section>
+      <section>
+        <li><img id="photo"></li>
+        <li id="name"></li>
+        <li id="address"></li>
+        <li id="tel"></li>
+      </section>
       <aside></aside>
     </main>
     <footer>
